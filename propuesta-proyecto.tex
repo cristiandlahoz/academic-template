@@ -286,7 +286,7 @@ El método socrático representa un antídoto directo a este fenómeno porque:
 
 Liffiton et al. \cite{liffiton2023codehelp} desarrollaron CodeHelp, un sistema que utiliza LLMs con ``guardrails robustos que están específicamente diseñados para no revelar soluciones directamente mientras ayudan a los estudiantes a resolver sus problemas''. Desplegado durante 12 semanas en un curso de 52 estudiantes, CodeHelp fue ``bien recibido por los estudiantes''.
 
-Feng et al. \cite{feng2021its} documentan que sistemas modernos de tutoría basados en EMT ``que utilizan diálogo para andamiaje funcionan tan bien como tutores humanos en temas STEM'', con tamaños de efecto d=1.0 comparables a tutoría humana individual.
+Feng et al. \cite{feng2021its} documentan que sistemas modernos de tutoría basados en EMT (Expectation-Misconception Tailoring, un marco pedagógico que adapta la instrucción según las expectativas y misconcepciones del estudiante) ``que utilizan diálogo para andamiaje funcionan tan bien como tutores humanos en temas STEM (Science, Technology, Engineering, and Mathematics)'', con tamaños de efecto d=1.0 (donde d representa la diferencia estandarizada entre grupos de control y experimentales; d=1.0 indica una mejora de una desviación estándar completa, considerado un efecto muy grande) comparables a tutoría humana individual.
 
 \subsection{Ventaja Estratégica: Propiedad Institucional}
 
@@ -330,14 +330,6 @@ A diferencia de ChatGPT, Gemini, GitHub Copilot u otras herramientas comerciales
     \item Límites de asistencia anti-pereza (tiempo mínimo de intento, máximo de pistas)
 \end{itemize}
 
-\subsection{Módulo 4: Rastreo de Conocimiento}
-
-\begin{itemize}
-    \item Modelo dinámico del conocimiento del estudiante
-    \item Taxonomía de Componentes de Conocimiento (KCs) para ICC-101-T
-    \item Actualización de maestría en tiempo real basada en respuestas
-\end{itemize}
-
 \subsection{Módulo 5: Panel de Instructor}
 
 \begin{itemize}
@@ -362,79 +354,17 @@ A diferencia de ChatGPT, Gemini, GitHub Copilot u otras herramientas comerciales
 
 \subsection{Alcance de MVP (6 meses)}
 
-[[CHECK]] Módulos 1, 2, 3: Diálogo socrático con guardrails
-
-[[CHECK]] Módulo 4: Rastreo básico de conocimiento
-
-[[CHECK]] Módulo 5: Panel básico de instructor
-
-[[CHECK]] Módulo 6: Base de conocimiento para 3-4 algoritmos fundamentales
-
-[[CHECK]] Módulo 7: Prompts metacognitivos básicos
-
-% =============================================================================
-% SECCIÓN F: MODELO DE LOS PROCESOS DE NEGOCIOS
-% =============================================================================
-\section{Modelo de los Procesos de Negocios}
-
-\subsection{Proceso 1: Onboarding de Estudiante}
-
-\begin{enumerate}
-    \item Estudiante accede mediante credenciales institucionales (SSO)
-    \item Sistema verifica inscripción en ICC-101-T
-    \item Tutorial interactivo explicando propósito y diferencias vs. ChatGPT
-    \item Ejercicio guiado de prueba
-    \item Cuenta activada con estado de conocimiento inicial
-\end{enumerate}
-
-\subsection{Proceso 2: Sesión de Tutoría Socrática}
-
-\begin{enumerate}
-    \item Estudiante selecciona tópico algorítmico
-    \item Completa formulario de contexto estructurado
-    \item AGENTE 1 (Analista) procesa código e identifica problemas
-    \item Sistema consulta modelo de conocimiento
-    \item Gestor de diálogo determina etapa EMT apropiada
-    \item AGENTE 2 (Filtro Pedagógico) genera respuesta socrática
-    \item Validador Anti-Solución verifica ausencia de soluciones completas
-    \item Respuesta mostrada al estudiante
-    \item Respuesta del estudiante actualiza modelo de conocimiento
-\end{enumerate}
-
-\subsection{Proceso 3: Monitoreo por Instructor}
-
-Instructor accede a panel que presenta:
 \begin{itemize}
-    \item Lista de estudiantes activos
-    \item Alertas de estudiantes que excedieron límites
-    \item Distribución de tópicos solicitados
-    \item Problemas con mayor tasa de dificultad
+    \item Módulos 1, 2, 3: Diálogo socrático con guardrails
+    \item Módulo 5: Panel básico de instructor
+    \item Módulo 6: Base de conocimiento para 3-4 algoritmos fundamentales
+    \item Módulo 7: Prompts metacognitivos básicos
 \end{itemize}
-
-\subsection{Proceso 4: Escalación a Instructor}
-
-Cuando estudiante excede límites (3 sesiones o 5 turnos):
-\begin{enumerate}
-    \item Sistema genera resumen automático
-    \item Notifica a instructor con contexto completo
-    \item Informa al estudiante con expectativas claras
-\end{enumerate}
-
-\subsection{Integración con Flujo de Curso Existente}
-
-\begin{itemize}
-    \item \textbf{Semana 1-2:} Onboarding y explicación diferencia vs. ChatGPT
-    \item \textbf{Semana 3+:} Estudiantes usan tutor durante desarrollo de contenido
-    \item \textbf{Continuo:} Instructor revisa panel y ajusta énfasis en clase
-\end{itemize}
-
-El tutor \textbf{NO reemplaza}: clases presenciales, laboratorios, horas de oficina, evaluaciones sumativas.
-
-El tutor \textbf{SÍ aumenta}: disponibilidad (24/7), cantidad de práctica con retroalimentación, visibilidad de dificultades, datos institucionales.
 
 % =============================================================================
 % SECCIÓN G: REVISIÓN PRELIMINAR DE BIBLIOGRAFÍA
 % =============================================================================
+\newpage
 \section{Revisión Preliminar de Bibliografía y Proyectos Similares Existentes}
 
 \subsection{Sistemas Tutores Inteligentes: Fundamentos}
@@ -469,11 +399,11 @@ Fan et al. \cite{fan2024metacognitive} proporcionan evidencia experimental del f
 
 La literatura establece firmemente:
 \begin{itemize}
-    \item [[CHECK]] Viabilidad técnica de ITS basados en LLMs
-    \item [[CHECK]] Necesidad urgente de guardrails pedagógicos
-    \item [[CHECK]] Efectividad del marco EMT para STEM
-    \item [[CHECK]] Peligro real de pereza metacognitiva con IA generativa
-    \item [[CHECK]] Ventaja de propiedad institucional vs. herramientas comerciales
+    \item Viabilidad técnica de ITS basados en LLMs
+    \item Necesidad urgente de guardrails pedagógicos
+    \item Efectividad del marco EMT para STEM
+    \item Peligro real de pereza metacognitiva con IA generativa
+    \item Ventaja de propiedad institucional vs. herramientas comerciales
 \end{itemize}
 
 El proyecto propuesto se fundamenta en evidencia robusta y llena brecha específica en educación algorítmica.
