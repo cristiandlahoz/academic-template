@@ -5,7 +5,7 @@
 # y proporciona comandos útiles para el desarrollo y mantenimiento.
 
 # Variables de configuración
-MAIN_TEX = academic-template.tex
+MAIN_TEX = templates/academic-template.tex
 OUTPUT_NAME = document
 LATEX_ENGINE = pdflatex
 BIBER_ENGINE = biber

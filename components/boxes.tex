@@ -1,0 +1,31 @@
+\newtcolorbox{accentbox}[1][]{
+    sharp corners,
+    boxrule=0pt,
+    colframe=secondaryColor,
+    colback=primaryColor,
+    coltext=headerTextColor,
+    width=\textwidth,
+    center,
+    halign=center,
+    #1
+}
+
+\newtcolorbox{notebox}[1][]{
+    sharp corners,
+    boxrule=1pt,
+    colframe=accentColor,
+    colback=white,
+    coltext=bodyTextColor,
+    width=\textwidth,
+    #1
+}
+
+\newtcolorbox{highlightbox}[1][]{
+    sharp corners,
+    boxrule=0pt,
+    colframe=accentColor,
+    colback=accentColor!10,
+    coltext=bodyTextColor,
+    width=\textwidth,
+    #1
+}

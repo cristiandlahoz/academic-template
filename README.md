@@ -14,24 +14,28 @@ A professional, configuration-driven LaTeX template for academic documents with 
 ```
 academic-template/
 ├── .llm/
-│   └── prompts/           # LLM interaction prompts
-│       ├── schema.json    # Template configuration schema
-│       ├── modify-config.json
-│       ├── create-table.json
-│       └── add-content.json
+│   ├── prompts/
+│   │   ├── schema.json         # Template configuration schema
+│   │   ├── modify-config.json  # How to modify configuration
+│   │   ├── create-table.json   # How to create tables
+│   │   └── add-content.json    # How to add document content
+│   └── README.md               # LLM interaction guide
 ├── config/
-│   ├── institution.tex    # Active configuration
+│   ├── institution.tex         # Active configuration
 │   └── presets/
-│       ├── pucmm.tex      # PUCMM preset
-│       └── default.tex    # Default preset
+│       ├── pucmm.tex           # PUCMM preset
+│       └── default.tex         # Default preset
 ├── components/
-│   └── tables.tex         # Reusable table components
-├── assets/                # Logos and images
-├── output/                # Generated PDFs
-├── academic-template.tex  # Main template
-├── title-page.tex         # Title page template
-├── biblio.bib             # Bibliography
-└── Makefile               # Build automation
+│   ├── tables.tex              # Reusable table components
+│   ├── headers.tex             # Header/footer components
+│   └── boxes.tex               # Box/callout components
+├── templates/
+│   └── academic-template.tex   # Base template
+├── assets/                     # Logos and images
+├── output/                     # Generated PDFs
+├── title-page.tex              # Title page template
+├── biblio.bib                  # Bibliography
+└── Makefile                    # Build automation
 ```
 
 ## Quick Start

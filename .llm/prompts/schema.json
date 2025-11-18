@@ -23,5 +23,14 @@
     "tables": "components/tables.tex",
     "headers": "components/headers.tex",
     "boxes": "components/boxes.tex"
+  },
+  "templates": {
+    "academic": "templates/academic-template.tex"
+  },
+  "structure": {
+    "config": "config/institution.tex",
+    "presets": "config/presets/",
+    "assets": "assets/",
+    "output": "output/"
   }
 }
