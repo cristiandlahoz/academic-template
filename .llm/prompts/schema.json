@@ -22,7 +22,8 @@
   "components": {
     "tables": "components/tables.tex",
     "headers": "components/headers.tex",
-    "boxes": "components/boxes.tex"
+    "boxes": "components/boxes.tex",
+    "title-page": "components/title-page.tex"
   },
   "templates": {
     "academic": "templates/academic-template.tex"

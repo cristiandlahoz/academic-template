@@ -28,12 +28,12 @@ academic-template/
 ├── components/
 │   ├── tables.tex              # Reusable table components
 │   ├── headers.tex             # Header/footer components
-│   └── boxes.tex               # Box/callout components
+│   ├── boxes.tex               # Box/callout components
+│   └── title-page.tex          # Title page component
 ├── templates/
 │   └── academic-template.tex   # Base template
 ├── assets/                     # Logos and images
 ├── output/                     # Generated PDFs
-├── title-page.tex              # Title page template
 ├── biblio.bib                  # Bibliography
 └── Makefile                    # Build automation
 ```

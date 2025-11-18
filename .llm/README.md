@@ -37,7 +37,8 @@ academic-template/
 ├── components/
 │   ├── tables.tex         # Table components
 │   ├── headers.tex        # Header/footer components
-│   └── boxes.tex          # Box/callout components
+│   ├── boxes.tex          # Box/callout components
+│   └── title-page.tex     # Title page component
 ├── templates/
 │   └── academic-template.tex  # Base template
 ├── assets/                # Logos and images

@@ -75,6 +75,23 @@ setup:
 	@mkdir -p $(BUILD_DIR)
 	@mkdir -p $(OUTPUT_DIR)
 
+# Primera configuración del proyecto
+.PHONY: init
+init: check-deps setup
+	@echo "=== Inicializando Academic Template ==="
+	@echo "Verificando estructura..."
+	@test -d config || { echo "Error: directorio config/ no encontrado"; exit 1; }
+	@test -d components || { echo "Error: directorio components/ no encontrado"; exit 1; }
+	@test -d templates || { echo "Error: directorio templates/ no encontrado"; exit 1; }
+	@echo "Estructura verificada correctamente."
+	@echo ""
+	@echo "Para comenzar:"
+	@echo "  1. Edita config/institution.tex con tu institución"
+	@echo "  2. Coloca tu logo en assets/"
+	@echo "  3. Ejecuta 'make build'"
+	@echo ""
+	@echo "=== Template listo para usar ==="
+
 # Limpiar archivos temporales
 .PHONY: clean
 clean:
