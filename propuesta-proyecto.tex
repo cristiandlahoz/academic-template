@@ -1,0 +1,488 @@
+% =============================================================================
+% PROPUESTA DE PROYECTO DE FIN DE CARRERA - PUCMM
+% =============================================================================
+% Sistema Tutor Socrático basado en LLM para ICC-101-T
+% =============================================================================
+
+\documentclass[12pt]{article}
+
+% =============================================================================
+% PAQUETES Y CONFIGURACIÓN
+% =============================================================================
+\usepackage[letterpaper, margin=1in, headheight=0.25in, headsep=0.5in]{geometry}
+\setlength{\footskip}{33.5pt}
+
+\usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{tabularray}
+\usepackage{tabularx}
+\usepackage{parskip}
+\usepackage{needspace}
+\usepackage{calc}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{amsmath}
+\usepackage[backend=biber, style=ieee, sortcites, url=true, autocite=superscript]{biblatex}
+\usepackage{csquotes}
+\usepackage{hyperref}
+
+% =============================================================================
+% COLORES
+% =============================================================================
+\definecolor{primaryColor}{RGB}{124, 10, 2}
+\definecolor{secondaryColor}{RGB}{240, 89, 65}
+\definecolor{accentColor}{RGB}{239, 167, 0}
+\definecolor{linkColor}{RGB}{239, 167, 0}
+\definecolor{headerTextColor}{RGB}{255, 255, 255}
+\definecolor{bodyTextColor}{RGB}{0, 0, 0}
+
+% =============================================================================
+% FORMATO DE TÍTULOS
+% =============================================================================
+\titleformat{\section}
+    {\color{primaryColor}\Large\bfseries}
+    {\fcolorbox{primaryColor}{primaryColor}{\color{headerTextColor}\thesection}}
+    {1em}
+    {}
+    [{\titlerule[0.5ex]}]
+
+\titleformat{\subsection}
+    {\color{primaryColor}\large}
+    {\bfseries\color{primaryColor}\thesubsection}
+    {1em}
+    {}
+
+\titleformat{\subsubsection}
+    {\color{primaryColor}}
+    {\bfseries\color{primaryColor}\thesubsubsection}
+    {1em}
+    {}
+
+% =============================================================================
+% ENCABEZADOS Y PIES DE PÁGINA
+% =============================================================================
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\newcommand{\createHeaderBox}{
+    \begin{tikzpicture}[overlay, remember picture, x=1in, y=1in, shift=(current page.north west)]
+        \fill[primaryColor] (1,-0.25) rectangle (\headerBoxWidth,-0.5);
+        \draw[secondaryColor, ultra thick] (0.25,-0.5) -- (6,-0.5);
+    \end{tikzpicture}
+}
+
+\newcommand{\createFooterLogo}{
+    \color{secondaryColor}\textbf{PUCMM}
+}
+
+\fancyhead{}
+\fancyfoot{}
+\fancyfoot[R]{\createFooterLogo}
+\fancyhead[L]{\createHeaderBox\color{headerTextColor}Propuesta}
+\fancyhead[R]{\color{bodyTextColor}Pág.\ \thepage\ -~\pageref{LastPage}}
+
+% =============================================================================
+% TABLA DE CONTENIDOS
+% =============================================================================
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftbeforesecskip}{0.5em}
+\setlength{\cftbeforesubsecskip}{0.2em}
+
+% =============================================================================
+% VARIABLES DEL DOCUMENTO
+% =============================================================================
+\newcommand{\universityName}{Pontificia Universidad Católica Madre y Maestra}
+\newcommand{\departmentName}{Escuela de Ingeniería en Computación y Telecomunicaciones}
+\newcommand{\facultyName}{Facultad de Ciencias de la Ingeniería}
+
+\newcommand{\documentMainTitle}{Tutor Socrático: Sistema Inteligente de Tutoría Basado en LLM con Metodología Socrática para la Enseñanza de Introducción a la Algoritmia}
+\newcommand{\documentShortTitle}{Tutor Socrático}
+
+\newcommand{\courseName}{Proyecto de Fin de Carrera}
+\newcommand{\courseCode}{ISC}
+
+\newcommand{\studentName}{Cristian Ignacio De La Hoz Reyes \& Manuel José Rodríguez Cruz}
+\newcommand{\studentId}{10149779 \& 10150681}
+
+\newcommand{\instructorName}{[Asesor del Proyecto]}
+
+\newcommand{\submissionDate}{Noviembre de 2025}
+\newcommand{\shortDate}{15/11/2025}
+
+\newcommand{\institutionalLogo}{assets/pucmm_logo.png}
+
+% =============================================================================
+% BIBLIOGRAFÍA
+% =============================================================================
+\addbibresource{biblio.bib}
+
+% =============================================================================
+% HIPERVÍNCULOS
+% =============================================================================
+\hypersetup{
+    linktoc=page,
+    colorlinks=true,
+    allcolors=linkColor,
+    pdftitle=\documentMainTitle
+}
+
+% =============================================================================
+% DIMENSIONES
+% =============================================================================
+\newlength{\headerBoxWidth}
+\AtBeginDocument{
+    \setlength{\headerBoxWidth}{\widthof{\documentShortTitle}+1.11in}
+}
+
+% =============================================================================
+% INICIO DEL DOCUMENTO
+% =============================================================================
+\begin{document}
+
+% =============================================================================
+% PÁGINA DE TÍTULO
+% =============================================================================
+\begin{titlepage}
+    \thispagestyle{empty}
+    \begin{center}
+        
+        \includegraphics[width=1.5in]{\institutionalLogo}
+        \vspace{0.2in}
+
+        \noindent\rule{\textwidth}{0.4pt}
+        \noindent\rule{\textwidth}{7pt}
+        \vspace{0.2in}
+
+        {\Huge\bfseries \universityName}
+        \vspace{0.2in}
+
+        {\Large\bfseries \departmentName}
+        
+        {\large\bfseries \facultyName}
+        \vspace{0.2in}
+
+        \begin{tcolorbox}[
+            sharp corners,
+            boxrule=0pt, 
+            colframe=secondaryColor, 
+            colback=primaryColor, 
+            coltext=headerTextColor, 
+            width=1\textwidth, 
+            center, 
+            halign=center
+        ]
+            \Huge\bfseries Proyecto de Fin de Carrera\\[0.1in]
+            FORMULARIO PROPUESTA DE TEMA PARA PROYECTO PARA ISC
+        \end{tcolorbox}
+        \vspace{0.2in}
+
+        {\Large\bfseries \documentMainTitle}
+        \vspace{0.3in}
+
+        \vfill
+
+        {\large\bfseries \studentName}
+        
+        {\small\bfseries \studentId}
+
+        \vfill
+        \vspace{0.1in}
+
+    \end{center}
+\end{titlepage}
+
+% =============================================================================
+% TABLA DE CONTENIDOS
+% =============================================================================
+\newpage
+\pagenumbering{Roman}
+\tableofcontents
+\newpage
+
+% =============================================================================
+% CONTENIDO PRINCIPAL
+% =============================================================================
+\pagenumbering{arabic}
+\pagestyle{fancy}
+
+% =============================================================================
+% SECCIÓN A: INTEGRANTES DEL GRUPO
+% =============================================================================
+\section{Integrantes del grupo}
+
+\vspace{0.3in}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{>{\centering\arraybackslash}p{1.8cm}>{\raggedright\arraybackslash}p{4.2cm}>{\centering\arraybackslash}p{3.5cm}>{\raggedright\arraybackslash}X}
+\toprule
+\rowcolor{primaryColor}\color{white}\textbf{Matrícula} & \color{white}\textbf{Nombre y apellido} & \color{white}\textbf{Teléfono} & \color{white}\textbf{Correo electrónico} \\
+\midrule
+10149779 & Cristian Ignacio \newline De La Hoz Reyes & +1 (849) 264-6561 & CIDR0001@ce.pucmm.edu.do \\
+10150681 & Manuel José \newline Rodríguez Cruz & +1 (829) 354-3720 & MJRC0002@ce.pucmm.edu.do \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{0.3in}
+
+% =============================================================================
+% SECCIÓN B: TÍTULO DEL TEMA PROPUESTO
+% =============================================================================
+\section{Título del tema propuesto}
+
+\noindent Tutor Socrático: Sistema Inteligente de Tutoría Basado en LLM con Metodología Socrática para la Enseñanza de Introducción a la Algoritmia.
+
+% =============================================================================
+% SECCIÓN C: IDENTIFICACIÓN DE LA PROBLEMÁTICA
+% =============================================================================
+\section{Identificación de la Problemática}
+
+El curso ICC-101-T (Introducción a la Algoritmia) de PUCMM Campus Santiago enfrenta una crisis pedagógica derivada del uso indiscriminado de herramientas de inteligencia artificial generativa por parte de los estudiantes. La disponibilidad pública de sistemas como ChatGPT, Gemini y similares ha creado un patrón de comportamiento donde los estudiantes utilizan estas herramientas principalmente para obtener soluciones completas a sus tareas y exámenes, en lugar de emplearlas como apoyo genuino al aprendizaje.
+
+Esta situación genera tres consecuencias críticas:
+
+\subsection{Pereza Metacognitiva}
+
+Fan et al. \cite{fan2024metacognitive} documentan experimentalmente el fenómeno de ``metacognitive laziness'' (pereza metacognitiva) en estudiantes que utilizan ChatGPT. Su estudio aleatorizado con 117 estudiantes universitarios revela que, aunque ChatGPT mejora significativamente el desempeño en tareas a corto plazo, no impulsa la motivación intrínseca ni la ganancia y transferencia de conocimiento. Los estudiantes que usaron ChatGPT mostraron menos evaluación metacognitiva, monitoreo y orientación, exhibiendo dependencia tecnológica sin desarrollo correspondiente de capacidades cognitivas profundas.
+
+\subsection{Crisis de Integridad Académica}
+
+La facultad reporta una brecha creciente entre el desempeño en tareas (donde el uso de IA es difícil de detectar) y el desempeño en evaluaciones presenciales. Los estudiantes presentan código que no pueden explicar, evidenciando que la ``ayuda'' de herramientas comerciales de IA se ha convertido en sustitución completa del proceso de aprendizaje. Esta situación erosiona la validez de las evaluaciones y devalúa las credenciales académicas institucionales.
+
+\subsection{Deficiencias en Fundamentos Algorítmicos}
+
+ICC-101-T es un curso de entrada sin prerrequisitos de programación, diseñado para desarrollar pensamiento computacional desde cero. Los estudiantes que evitan la ``lucha productiva'' mediante uso de IA no desarrollan habilidades esenciales como: abstracción de problemas, diseño de invariantes de ciclo, razonamiento sobre casos base recursivos, y análisis de complejidad algorítmica.
+
+% =============================================================================
+% SECCIÓN D: JUSTIFICACIÓN
+% =============================================================================
+\section{Justificación}
+
+La construcción de un Sistema Tutor Socrático institucional para ICC-101-T se justifica desde tres perspectivas convergentes: necesidad pedagógica urgente, viabilidad técnica comprobada, y alineación estratégica institucional.
+
+\subsection{Necesidad Pedagógica: Combatir la Pereza Metacognitiva}
+
+El método socrático representa un antídoto directo a este fenómeno porque:
+\begin{enumerate}
+    \item Exige articulación explícita de razonamiento, activando procesamiento metacognitivo
+    \item Expone lagunas en comprensión mediante preguntas penetrantes, creando el desequilibrio cognitivo necesario para aprendizaje profundo
+    \item Transfiere autoridad epistémica al estudiante, quien debe construir conocimiento mediante razonamiento guiado
+    \item Promueve monitoreo metacognitivo continuo mediante cuestionamiento reflexivo
+\end{enumerate}
+
+\subsection{Viabilidad Técnica: Evidencia Empírica}
+
+Liffiton et al. \cite{liffiton2023codehelp} desarrollaron CodeHelp, un sistema que utiliza LLMs con ``guardrails robustos que están específicamente diseñados para no revelar soluciones directamente mientras ayudan a los estudiantes a resolver sus problemas''. Desplegado durante 12 semanas en un curso de 52 estudiantes, CodeHelp fue ``bien recibido por los estudiantes''.
+
+Feng et al. \cite{feng2021its} documentan que sistemas modernos de tutoría basados en EMT ``que utilizan diálogo para andamiaje funcionan tan bien como tutores humanos en temas STEM'', con tamaños de efecto d=1.0 comparables a tutoría humana individual.
+
+\subsection{Ventaja Estratégica: Propiedad Institucional}
+
+A diferencia de ChatGPT, Gemini, GitHub Copilot u otras herramientas comerciales, un sistema propiedad de PUCMM proporciona:
+\begin{itemize}
+    \item \textbf{Alineación de incentivos:} Optimizar para aprendizaje profundo, no satisfacción inmediata del usuario
+    \item \textbf{Integración curricular:} Diseño específico para ICC-101-T
+    \item \textbf{Datos institucionales:} Control completo de información del aprendizaje
+    \item \textbf{Autorización explícita:} Eliminación de ambigüedad sobre integridad académica
+    \item \textbf{Control de evolución:} Adaptación basada en evidencia empírica institucional
+\end{itemize}
+
+% =============================================================================
+% SECCIÓN E: FUNCIONALIDADES DEL PROYECTO
+% =============================================================================
+\section{Funcionalidades del Proyecto}
+
+\subsection{Módulo 1: Interfaz de Diálogo Socrático}
+
+\begin{itemize}
+    \item Chat conversacional estructurado con editor de código integrado
+    \item Formulario de contexto estructurado (problema, código, casos de prueba, lo intentado, pregunta)
+    \item Streaming de respuestas en tiempo real
+    \item Historial de conversación persistente
+\end{itemize}
+
+\subsection{Módulo 2: Motor de Diálogo Socrático}
+
+\begin{itemize}
+    \item Framework EMT (Expectation-Misconception Tailoring)
+    \item Base de conocimiento de expectativas por algoritmo
+    \item Catálogo de misconcepciones comunes
+    \item Patrones de diálogo: rastreo de ejecución, invariantes de ciclo, complejidad, casos límite
+\end{itemize}
+
+\subsection{Módulo 3: Sistema de Guardrails Multi-Capa}
+
+\begin{itemize}
+    \item Arquitectura de dos agentes (Analista + Filtro Pedagógico)
+    \item Validador anti-solución (verifica ausencia de código completo)
+    \item Límites de asistencia anti-pereza (tiempo mínimo de intento, máximo de pistas)
+\end{itemize}
+
+\subsection{Módulo 4: Rastreo de Conocimiento}
+
+\begin{itemize}
+    \item Modelo dinámico del conocimiento del estudiante
+    \item Taxonomía de Componentes de Conocimiento (KCs) para ICC-101-T
+    \item Actualización de maestría en tiempo real basada en respuestas
+\end{itemize}
+
+\subsection{Módulo 5: Panel de Instructor}
+
+\begin{itemize}
+    \item Monitoreo de interacciones estudiantiles
+    \item Identificación automática de estudiantes en dificultad
+    \item Analíticas de aprendizaje (tiempo por tema, tasa de dificultad, progresión)
+\end{itemize}
+
+\subsection{Módulo 6: Base de Conocimiento ICC-101-T}
+
+\begin{itemize}
+    \item Indexación de contenido curricular (syllabus, materiales, ejemplos)
+    \item Alineación con objetivos de aprendizaje del curso
+\end{itemize}
+
+\subsection{Módulo 7: Scaffolding Metacognitivo}
+
+\begin{itemize}
+    \item Prompts metacognitivos obligatorios (``¿Por qué crees que...?'')
+    \item Presentación de disfluencia deseable (casos que contradicen expectativas)
+\end{itemize}
+
+\subsection{Alcance de MVP (6 meses)}
+
+[[CHECK]] Módulos 1, 2, 3: Diálogo socrático con guardrails
+
+[[CHECK]] Módulo 4: Rastreo básico de conocimiento
+
+[[CHECK]] Módulo 5: Panel básico de instructor
+
+[[CHECK]] Módulo 6: Base de conocimiento para 3-4 algoritmos fundamentales
+
+[[CHECK]] Módulo 7: Prompts metacognitivos básicos
+
+% =============================================================================
+% SECCIÓN F: MODELO DE LOS PROCESOS DE NEGOCIOS
+% =============================================================================
+\section{Modelo de los Procesos de Negocios}
+
+\subsection{Proceso 1: Onboarding de Estudiante}
+
+\begin{enumerate}
+    \item Estudiante accede mediante credenciales institucionales (SSO)
+    \item Sistema verifica inscripción en ICC-101-T
+    \item Tutorial interactivo explicando propósito y diferencias vs. ChatGPT
+    \item Ejercicio guiado de prueba
+    \item Cuenta activada con estado de conocimiento inicial
+\end{enumerate}
+
+\subsection{Proceso 2: Sesión de Tutoría Socrática}
+
+\begin{enumerate}
+    \item Estudiante selecciona tópico algorítmico
+    \item Completa formulario de contexto estructurado
+    \item AGENTE 1 (Analista) procesa código e identifica problemas
+    \item Sistema consulta modelo de conocimiento
+    \item Gestor de diálogo determina etapa EMT apropiada
+    \item AGENTE 2 (Filtro Pedagógico) genera respuesta socrática
+    \item Validador Anti-Solución verifica ausencia de soluciones completas
+    \item Respuesta mostrada al estudiante
+    \item Respuesta del estudiante actualiza modelo de conocimiento
+\end{enumerate}
+
+\subsection{Proceso 3: Monitoreo por Instructor}
+
+Instructor accede a panel que presenta:
+\begin{itemize}
+    \item Lista de estudiantes activos
+    \item Alertas de estudiantes que excedieron límites
+    \item Distribución de tópicos solicitados
+    \item Problemas con mayor tasa de dificultad
+\end{itemize}
+
+\subsection{Proceso 4: Escalación a Instructor}
+
+Cuando estudiante excede límites (3 sesiones o 5 turnos):
+\begin{enumerate}
+    \item Sistema genera resumen automático
+    \item Notifica a instructor con contexto completo
+    \item Informa al estudiante con expectativas claras
+\end{enumerate}
+
+\subsection{Integración con Flujo de Curso Existente}
+
+\begin{itemize}
+    \item \textbf{Semana 1-2:} Onboarding y explicación diferencia vs. ChatGPT
+    \item \textbf{Semana 3+:} Estudiantes usan tutor durante desarrollo de contenido
+    \item \textbf{Continuo:} Instructor revisa panel y ajusta énfasis en clase
+\end{itemize}
+
+El tutor \textbf{NO reemplaza}: clases presenciales, laboratorios, horas de oficina, evaluaciones sumativas.
+
+El tutor \textbf{SÍ aumenta}: disponibilidad (24/7), cantidad de práctica con retroalimentación, visibilidad de dificultades, datos institucionales.
+
+% =============================================================================
+% SECCIÓN G: REVISIÓN PRELIMINAR DE BIBLIOGRAFÍA
+% =============================================================================
+\section{Revisión Preliminar de Bibliografía y Proyectos Similares Existentes}
+
+\subsection{Sistemas Tutores Inteligentes: Fundamentos}
+
+Feng, Magana y Kao \cite{feng2021its} realizaron una revisión sistemática de literatura sobre efectividad de ITS en dominios STEM. Sus hallazgos establecen que ITS muestran tamaños de efecto d=1.0 comparables al impacto de tutoría humana individual. Sistemas basados en Expectation-Misconception Tailoring (EMT) que utilizan diálogo funcionan tan bien como tutores humanos en temas STEM.
+
+\subsection{LLMs en Educación de Programación}
+
+Hellas et al. \cite{hellas2023llm} evaluaron respuestas de LLMs a solicitudes reales de ayuda de 150 estudiantes principiantes. GPT-3.5 identificó al menos un problema en 90\% de casos, validando utilidad potencial de LLMs. Sin embargo, ``las soluciones modelo se proporcionan frecuentemente incluso cuando se le solicita explícitamente al LLM que no lo haga''. Conclusión: ingeniería de prompts sola es insuficiente; se requieren guardrails arquitectónicos.
+
+\subsection{CodeHelp: Implementación de Guardrails}
+
+Liffiton et al. \cite{liffiton2023codehelp} desarrollaron CodeHelp, directamente relevante como modelo arquitectónico. Implementa: formulario de entrada estructurado, sistema de dos agentes, guardrails automatizados, panel de instructor. Resultados: bien recibido por estudiantes, fácil de desplegar, complementa (no reemplaza) apoyo humano.
+
+\subsection{Ruffle\&Riley: Generación Automatizada de Tutores}
+
+Schmucker et al. \cite{schmucker2023rufferiley} proponen generación automática de scripts de tutoría a partir de texto de lección usando marco EMT. Introduce formato de aprendizaje-enseñando con dos agentes. Evaluación: usuarios reportaron calificaciones más altas de comprensión, retención, utilidad percibida.
+
+\subsection{Knowledge Tracing con LLMs}
+
+Scarlatos, Baker y Lan \cite{scarlatos2025dialogue} proponen DialogueKT para rastreo de conocimiento en diálogos tutoriales. Método LLMKT permite identificar componentes de conocimiento en cada turno y predecir desempeño futuro. Relevancia: permite que sistema rastree maestría de KCs específicos de algoritmos y adapte dificultad dinámicamente.
+
+\subsection{Limitaciones de Adaptividad en LLMs}
+
+Borchers y Shou \cite{borchers2025llm} proporcionan evaluación crítica. Encuentran que incluso modelo mejor sigue marginalmente la adaptividad de ITS tradicionales. GPT-4o ``sigue instrucciones confiablemente pero tiende a proporcionar retroalimentación excesivamente directa''. Implicación: no depender de capacidades inherentes del LLM; arquitectura explícita necesaria.
+
+\subsection{Pereza Metacognitiva: El Problema Central}
+
+Fan et al. \cite{fan2024metacognitive} proporcionan evidencia experimental del fenómeno que motiva centralmente este proyecto. Estudio con 117 estudiantes: ChatGPT mejora desempeño a corto plazo pero no impulsa motivación intrínseca ni ganancia/transferencia de conocimiento. Usuarios mostraron menos evaluación metacognitiva. Concepto: ``metacognitive laziness'' — IA puede promover dependencia sin aprendizaje profundo.
+
+\subsection{Conclusión de la Revisión}
+
+La literatura establece firmemente:
+\begin{itemize}
+    \item [[CHECK]] Viabilidad técnica de ITS basados en LLMs
+    \item [[CHECK]] Necesidad urgente de guardrails pedagógicos
+    \item [[CHECK]] Efectividad del marco EMT para STEM
+    \item [[CHECK]] Peligro real de pereza metacognitiva con IA generativa
+    \item [[CHECK]] Ventaja de propiedad institucional vs. herramientas comerciales
+\end{itemize}
+
+El proyecto propuesto se fundamenta en evidencia robusta y llena brecha específica en educación algorítmica.
+
+% =============================================================================
+% REFERENCIAS BIBLIOGRÁFICAS
+% =============================================================================
+\newpage
+\pagestyle{empty}
+\printbibliography[heading=bibintoc, title={Referencias Bibliográficas}]
+
+\end{document}
