@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "template": "academic-template",
+  "configuration": {
+    "institution": {
+      "institutionName": {"type": "string", "required": true},
+      "institutionShortName": {"type": "string", "required": true, "maxLength": 10},
+      "institutionLogo": {"type": "path", "required": true, "format": "assets/*.png"}
+    },
+    "colors": {
+      "primaryColor": {"type": "rgb", "required": true},
+      "secondaryColor": {"type": "rgb", "required": true},
+      "accentColor": {"type": "rgb", "required": true},
+      "linkColor": {"type": "rgb", "required": true},
+      "headerTextColor": {"type": "rgb", "required": true},
+      "bodyTextColor": {"type": "rgb", "required": true}
+    },
+    "localization": {
+      "documentLanguage": {"type": "enum", "values": ["spanish", "english"], "required": true}
+    }
+  },
+  "components": {
+    "tables": "components/tables.tex",
+    "headers": "components/headers.tex",
+    "boxes": "components/boxes.tex"
+  }
+}
