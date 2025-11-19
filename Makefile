@@ -1,9 +1,3 @@
-# =============================================================================
-# MAKEFILE PROFESIONAL PARA TEMPLATE ACADÉMICO
-# =============================================================================
-# Este Makefile automatiza la compilación del documento LaTeX con bibliografía
-# y proporciona comandos útiles para el desarrollo y mantenimiento.
-
 # Variables de configuración
 MAIN_TEX = templates/academic-template.tex
 OUTPUT_NAME = document
@@ -19,17 +13,19 @@ OUTPUT_DIR = output
 PDF_OUTPUT = $(OUTPUT_DIR)/$(OUTPUT_NAME).pdf
 TEMP_FILES = *.aux *.bbl *.bcf *.blg *.fdb_latexmk *.fls *.log *.out *.run.xml *.synctex.gz *.toc *.lof *.lot
 
-# =============================================================================
-# COMANDOS PRINCIPALES
-# =============================================================================
+##@ General
 
-# Comando por defecto: compilación completa
+.PHONY: help
+help: ## Display this help
+	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_0-9-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+
 .PHONY: all
-all: build
+all: build ## Default target: complete build
 
-# Compilación completa con bibliografía
+##@ Build
+
 .PHONY: build
-build: setup
+build: setup ## Complete compilation with bibliography
 	@echo "=== Iniciando compilación completa ==="
 	@echo "Primera pasada de LaTeX..."
 	$(LATEX_ENGINE) -output-directory=$(BUILD_DIR) $(MAIN_TEX)
@@ -45,39 +41,32 @@ build: setup
 	@echo "=== Compilación completada exitosamente ==="
 	@echo "Archivo generado: $(PDF_OUTPUT)"
 
-# Compilación rápida (sin bibliografía)
 .PHONY: quick
-quick: setup
+quick: setup ## Quick compilation without bibliography
 	@echo "=== Compilación rápida (sin bibliografía) ==="
 	$(LATEX_ENGINE) -output-directory=$(BUILD_DIR) $(MAIN_TEX)
 	@mkdir -p $(OUTPUT_DIR)
 	@cp $(BUILD_DIR)/$(basename $(MAIN_TEX)).pdf $(PDF_OUTPUT)
 	@echo "=== Compilación rápida completada ==="
 
-# Visualizar el documento
 .PHONY: view
-view: $(PDF_OUTPUT)
+view: $(PDF_OUTPUT) ## Open the generated PDF
 	@echo "Abriendo documento..."
 	$(VIEWER) $(PDF_OUTPUT)
 
-# Compilar y visualizar
 .PHONY: show
-show: build view
+show: build view ## Build and view the document
 
-# =============================================================================
-# COMANDOS DE MANTENIMIENTO
-# =============================================================================
+##@ Maintenance
 
-# Configuración inicial
 .PHONY: setup
-setup:
+setup: ## Create necessary directories
 	@echo "Creando directorios necesarios..."
 	@mkdir -p $(BUILD_DIR)
 	@mkdir -p $(OUTPUT_DIR)
 
-# Primera configuración del proyecto
 .PHONY: init
-init: check-deps setup
+init: check-deps setup ## Initialize the Academic Template project
 	@echo "=== Inicializando Academic Template ==="
 	@echo "Verificando estructura..."
 	@test -d config || { echo "Error: directorio config/ no encontrado"; exit 1; }
@@ -92,44 +81,37 @@ init: check-deps setup
 	@echo ""
 	@echo "=== Template listo para usar ==="
 
-# Limpiar archivos temporales
 .PHONY: clean
-clean:
+clean: ## Remove temporary files
 	@echo "Limpiando archivos temporales..."
 	@rm -f $(TEMP_FILES)
 	@rm -rf $(BUILD_DIR)/*
 	@echo "Archivos temporales eliminados."
 
-# Limpiar todo (incluyendo PDF de salida)
 .PHONY: clean-all
-clean-all: clean
+clean-all: clean ## Remove all generated files including output
 	@echo "Eliminando archivos de salida..."
 	@rm -rf $(OUTPUT_DIR)
 	@echo "Limpieza completa realizada."
 
-# =============================================================================
-# COMANDOS DE DESARROLLO
-# =============================================================================
+##@ Development
 
-# Compilación continua (requiere latexmk)
 .PHONY: watch
-watch:
+watch: ## Continuous compilation mode (requires latexmk)
 	@echo "=== Modo de compilación continua ==="
 	@echo "El documento se recompilará automáticamente al detectar cambios."
 	@echo "Presiona Ctrl+C para detener."
 	latexmk -pdf -pvc -output-directory=$(BUILD_DIR) $(MAIN_TEX)
 
-# Verificar dependencias
 .PHONY: check-deps
-check-deps:
+check-deps: ## Verify required dependencies
 	@echo "=== Verificando dependencias ==="
 	@command -v $(LATEX_ENGINE) >/dev/null 2>&1 || { echo "Error: $(LATEX_ENGINE) no está instalado."; exit 1; }
 	@command -v $(BIBER_ENGINE) >/dev/null 2>&1 || { echo "Error: $(BIBER_ENGINE) no está instalado."; exit 1; }
 	@echo "Todas las dependencias están disponibles."
 
-# Información del proyecto
 .PHONY: info
-info:
+info: ## Display project information
 	@echo "=== Información del Template Académico ==="
 	@echo "Archivo principal: $(MAIN_TEX)"
 	@echo "Motor LaTeX: $(LATEX_ENGINE)"
@@ -137,27 +119,5 @@ info:
 	@echo "Directorio de construcción: $(BUILD_DIR)"
 	@echo "Directorio de salida: $(OUTPUT_DIR)"
 	@echo "PDF final: $(PDF_OUTPUT)"
-	@echo ""
-	@echo "Comandos disponibles:"
-	@echo "  make build      - Compilación completa"
-	@echo "  make quick      - Compilación rápida"
-	@echo "  make view       - Ver documento"
-	@echo "  make show       - Compilar y ver"
-	@echo "  make clean      - Limpiar temporales"
-	@echo "  make clean-all  - Limpiar todo"
-	@echo "  make watch      - Compilación continua"
-	@echo "  make check-deps - Verificar dependencias"
 
-# Ayuda
-.PHONY: help
-help: info
-
-# =============================================================================
-# REGLAS ESPECIALES
-# =============================================================================
-
-# Prevenir eliminación de archivos intermedios
 .PRECIOUS: $(BUILD_DIR)/%.aux $(BUILD_DIR)/%.bbl
-
-# Indicar que estos targets no corresponden a archivos
-.PHONY: all build quick view show setup clean clean-all watch check-deps info help
